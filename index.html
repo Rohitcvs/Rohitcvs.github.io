@@ -78,8 +78,11 @@ code,.id{font-family:var(--mono);font-size:.86em}
 .hero .lede{font-size:1.1rem;line-height:1.6;color:#B9C3D4;max-width:44ch;margin:0 0 28px}
 .status{display:inline-flex;align-items:center;gap:10px;font-size:.95rem;color:#DCE2EC;border:1px solid rgba(255,255,255,.18);padding:7px 14px;border-radius:999px;margin:0 0 26px}
 .status i{width:9px;height:9px;border-radius:50%;background:#3CC37A;box-shadow:0 0 0 4px rgba(60,195,122,.18)}
-.links{display:flex;gap:12px;flex-wrap:wrap}
+.links{display:flex;gap:10px;flex-wrap:wrap}
 .btn{display:inline-block;padding:12px 22px;border-radius:9px;font-weight:600;text-decoration:none;font-size:.98rem;border:1.5px solid transparent;transition:background-color .15s,border-color .15s}
+.social{display:flex;gap:22px;margin:22px 0 0;font-weight:600}
+.social a{color:#DCE2EC;text-decoration:underline;text-decoration-color:rgba(255,255,255,.35)}
+.social a:hover{color:#fff;text-decoration-color:var(--gold-bright)}
 .btn.primary{background:var(--gold-bright);color:var(--ink-deep)}
 .btn.primary:hover{background:#E8C04A}
 .btn.ghost{color:#fff;border-color:rgba(255,255,255,.35)}
@@ -190,7 +193,7 @@ section + section{border-top:1px solid var(--rule)}
 .tools li{font-size:.9rem;padding:5px 11px;border-radius:7px;background:var(--paper)}
 
 /* education */
-.edu{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.edu{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .edu div{background:var(--sheet);border:1px solid var(--rule);border-radius:14px;padding:26px}
 .edu h3{font-family:var(--display);font-size:1.35rem;margin:0 0 6px;letter-spacing:-.01em}
 .edu p{margin:0;color:var(--ink-soft)}
@@ -249,26 +252,26 @@ footer small{display:block;margin-top:64px;color:#8792A8;font-size:.85rem;border
       <p class="lede">Data and AI engineer finishing my M.S. in Computer Science at Arizona State University. I build pipelines in Snowflake, dbt, Airflow and Azure, and LLM agents with LangGraph.</p>
       <p class="status"><i aria-hidden="true"></i>Open to full-time data roles</p>
       <div class="links">
-        <a class="btn primary" href="#work">See my projects</a>
-        <a class="btn ghost" href="https://www.linkedin.com/in/rohit-chintakindi/">LinkedIn</a>
-        <a class="btn ghost" href="https://github.com/Rohitcvs">GitHub</a>
+        <a class="btn primary" href="Rohit_Chintakindi_Resume.pdf" download>Download resume</a>
+        <a class="btn ghost" href="#work">See my projects</a>
       </div>
+      <p class="social"><a href="https://www.linkedin.com/in/rohit-chintakindi/">LinkedIn</a><a href="https://github.com/Rohitcvs">GitHub</a><a href="#contact">Contact</a></p>
     </div>
 
     <figure class="medallion" aria-label="My Quill attribution work as three data layers">
       <div class="layer b">
         <span class="tag">Raw</span>
-        <div class="fill"><b>4M+ rows</b>order and marketing touchpoint data in Snowflake</div>
+        <div class="fill"><b>2.55M+ customer journeys</b>across 42 marketing channels, in Snowflake and Python</div>
       </div>
       <div class="layer s">
         <span class="pipe" aria-hidden="true"></span>
         <span class="tag">Clean</span>
-        <div class="fill"><b>3 data-integrity issues</b>found and fixed before training, so conversions weren't over-counted</div>
+        <div class="fill"><b>RFM and 6-month cohorts</b>features built across 2.76M records, checked with VIF and 5-fold cross-validation</div>
       </div>
       <div class="layer g">
         <span class="pipe" aria-hidden="true"></span>
         <span class="tag">Model</span>
-        <div class="fill"><b>Channel attribution</b>a logistic-regression model showing which marketing channels drive conversions</div>
+        <div class="fill"><b>0.68 AUC, 15% less misattribution</b>logistic-regression attribution with counterfactual credit allocation</div>
       </div>
       <figcaption>My Data Science internship at Quill (summer 2026), traced from raw data to model.</figcaption>
     </figure>
@@ -286,12 +289,11 @@ footer small{display:block;margin-top:64px;color:#8792A8;font-size:.85rem;border
         <div class="when">Jun – Aug 2026<br>Lincolnshire, IL</div>
         <div class="what">
           <h3>Data Science Intern</h3>
-          <p class="org">Quill</p>
+          <p class="org">Quill Corporation (Staples Inc.)</p>
           <ul>
-            <li>Built a multi-touch attribution pipeline in Snowflake and Python over 4M+ order and touchpoint rows, with an external analytics vendor.</li>
-            <li>Found and fixed three data-integrity issues in raw touchpoint data, including placeholder order numbers shared across 200+ customers, that would have inflated conversion counts.</li>
-            <li>Designed a logistic-regression classifier that surfaced a marketing signal hidden by an unattributed-traffic placeholder present on 90%+ of converting customers.</li>
-            <li>Engineered RFM and rolling-window features to separate organic repurchases from marketing-driven conversions.</li>
+            <li>Built logistic-regression multi-touch attribution models in Python and Snowflake across 42 marketing channels, analyzing 2.55M+ customer journeys to measure each channel's impact on conversions.</li>
+            <li>Designed a counterfactual credit-allocation framework that stopped high-frequency channels from claiming 80%+ of attribution credit.</li>
+            <li>Developed conversion-propensity models with RFM features and 6-month rolling cohorts across 2.76M records, validated with VIF and 5-fold cross-validation: 0.68 AUC with a 0.0075 train/test gap, cutting marketing-spend misattribution by 15%.</li>
           </ul>
         </div>
       </li>
@@ -301,8 +303,8 @@ footer small{display:block;margin-top:64px;color:#8792A8;font-size:.85rem;border
           <h3>Gen AI Intern</h3>
           <p class="org">United We Care</p>
           <ul>
-            <li>Helped develop and fine-tune NLP models for empathetic, context-aware wellness chatbots.</li>
-            <li>Preprocessed and analyzed mental-health datasets to improve model accuracy and relevance.</li>
+            <li>Built an LLM-powered mental-health chatbot (Cohere, Whisper, Hugging Face) serving 5,000+ users; optimized prompts to improve relevance by 30% and contextual accuracy by 22% while keeping hallucinations under 4%.</li>
+            <li>Designed a modular AI workflow that separates ingestion, retrieval and generation, cutting debugging time by 40% and scaling from 1,000 to 5,000 daily active users without major architectural changes.</li>
           </ul>
         </div>
       </li>
@@ -310,10 +312,10 @@ footer small{display:block;margin-top:64px;color:#8792A8;font-size:.85rem;border
         <div class="when">Jun – Aug 2024<br>Lincolnshire, IL</div>
         <div class="what">
           <h3>Data Engineering Intern</h3>
-          <p class="org">Quill</p>
+          <p class="org">Quill Corporation (Staples Inc.)</p>
           <ul>
-            <li>Built API-based ETLs, data cleansing and visualizations, and helped design sales and digital-marketing aggregates.</li>
-            <li>Wrote Python modules that extract email campaigns and offers from Klaviyo as JSON.</li>
+            <li>Automated ingestion of 50,000+ monthly Klaviyo campaign promotions with Python, Kafka and Snowflake, an event-driven pipeline giving real-time visibility across 200+ active campaigns.</li>
+            <li>Built a KNN-based product recommendation engine in Snowflake over 10,000+ SKUs to find frequently bought-together products, improving sales-forecast accuracy by 10%.</li>
           </ul>
         </div>
       </li>
@@ -339,7 +341,7 @@ footer small{display:block;margin-top:64px;color:#8792A8;font-size:.85rem;border
           <li>FastAPI service with per-customer API keys and rate limits, 59 tests in CI, and a Dockerfile.</li>
         </ul>
         <ul class="stack" aria-label="Tools used">
-          <li>LangGraph</li><li>Python</li><li>FastAPI</li><li>Streamlit</li><li>SQLite</li><li>Docker</li><li>GitHub Actions</li>
+          <li>LangGraph</li><li>GPT-4o</li><li>Python</li><li>FastAPI</li><li>Streamlit</li><li>SQLite</li><li>Docker</li><li>GitHub Actions</li>
         </ul>
         <a class="repo" href="https://github.com/Rohitcvs/Investment-Agent">View the code on GitHub</a>
       </div>
@@ -369,9 +371,10 @@ footer small{display:block;margin-top:64px;color:#8792A8;font-size:.85rem;border
         <h3>Airbnb Pipeline with Snowflake and dbt</h3>
         <p class="pitch">Raw listings, hosts and bookings become analytics-ready tables in Snowflake, through a Bronze, Silver and Gold medallion design built entirely in dbt.</p>
         <ul>
-          <li>Incremental models and SCD Type 2 snapshots keep point-in-time history of every change.</li>
+          <li>Ingests 5,700 records across 3 source tables with incremental dbt models: watermark-filtered Bronze, merge-based Silver.</li>
+          <li>Three SCD Type 2 snapshots keep point-in-time history of every booking, host and listing.</li>
           <li>Used dbt's <code>check</code> snapshot strategy because the sources have no <code>updated_at</code>, so timestamp-based change detection couldn't work.</li>
-          <li>Custom macros and Jinja-generated SQL build the wide one-big-table and fact models.</li>
+          <li>Four reusable Jinja macros and loop-generated joins build the Gold one-big-table and fact models.</li>
         </ul>
         <ul class="stack" aria-label="Tools used">
           <li>Snowflake</li><li>dbt</li><li>Jinja</li><li>SQL</li><li>Python</li>
@@ -401,7 +404,8 @@ footer small{display:block;margin-top:64px;color:#8792A8;font-size:.85rem;border
         <h3>AdventureWorks Lakehouse on Azure</h3>
         <p class="pitch">An end-to-end Azure pipeline that takes retail sales data from source to Power BI dashboard, answering how sales perform across products, regions and customers over time.</p>
         <ul>
-          <li>Parameterized Data Factory pipelines, so a new source table is a config change, not a new pipeline.</li>
+          <li>One parameterized Data Factory pipeline, driven by JSON config, ingests 10 source files; a new table is a config change, not a new pipeline.</li>
+          <li>Models 6 dimensional entities: sales, customers, products, territories, returns and calendar.</li>
           <li>Gold views use <code>CREATE OR ALTER</code>, so the serving layer can be redeployed safely any number of times.</li>
           <li>Secrets live in Key Vault, and Power BI connects through a read-only login with least privilege.</li>
         </ul>
@@ -485,21 +489,22 @@ footer small{display:block;margin-top:64px;color:#8792A8;font-size:.85rem;border
       <p>What I've used in internships and the projects above.</p>
     </div>
     <div class="tools">
-      <div style="--c:var(--bronze)"><h3>Data engineering</h3><ul><li>Snowflake</li><li>dbt</li><li>Apache Airflow</li><li>Databricks, PySpark</li><li>ETL and medallion design</li></ul></div>
-      <div style="--c:var(--silver)"><h3>Cloud and databases</h3><ul><li>Azure Data Factory</li><li>ADLS Gen2, Synapse</li><li>PostgreSQL, MySQL</li><li>Docker</li></ul></div>
-      <div style="--c:var(--gold)"><h3>ML and AI</h3><ul><li>LangGraph, LangChain</li><li>scikit-learn, XGBoost</li><li>TensorFlow, Keras</li><li>Evaluations and guardrails</li></ul></div>
-      <div style="--c:var(--teal)"><h3>Languages and BI</h3><ul><li>Python, SQL</li><li>pandas</li><li>Power BI</li><li>FastAPI, Streamlit, Flask</li></ul></div>
+      <div style="--c:var(--bronze)"><h3>Data engineering</h3><ul><li>Snowflake</li><li>dbt</li><li>Apache Airflow</li><li>Databricks, PySpark</li><li>Apache Kafka</li><li>BigQuery</li><li>ETL and medallion design</li></ul></div>
+      <div style="--c:var(--silver)"><h3>Cloud and databases</h3><ul><li>Azure Data Factory</li><li>ADLS Gen2, Synapse</li><li>AWS</li><li>PostgreSQL, MySQL</li><li>Docker</li></ul></div>
+      <div style="--c:var(--gold)"><h3>ML and AI</h3><ul><li>LangGraph, LangChain</li><li>RAG, Hugging Face</li><li>scikit-learn, XGBoost</li><li>PyTorch, TensorFlow</li><li>Evaluations and guardrails</li></ul></div>
+      <div style="--c:var(--teal)"><h3>Languages and BI</h3><ul><li>Python, SQL, Java, C</li><li>pandas, NumPy</li><li>Power BI, Tableau</li><li>FastAPI, Streamlit, Flask</li></ul></div>
     </div>
   </section>
 
   <section aria-labelledby="edu-h">
     <div class="sec-head">
       <h2 id="edu-h">Education</h2>
-      <p>Both degrees from the Ira A. Fulton Schools of Engineering at Arizona State University.</p>
+      <p>Both degrees from the Ira A. Fulton Schools of Engineering at Arizona State University, plus a cloud data engineering certification.</p>
     </div>
     <div class="edu">
       <div><h3>M.S., Computer Science</h3><p>Arizona State University<br>Aug 2025 – Dec 2026</p></div>
-      <div><h3>B.S., Computer Science</h3><p>Arizona State University<br>2021 – 2025, GPA 3.62</p></div>
+      <div><h3>B.S., Computer Science, Minor in Data Science</h3><p>Arizona State University<br>2021 – 2025, 5x Dean's Honor List, hackathon winner</p></div>
+      <div><h3>Big Data Engineering Bootcamp</h3><p>Certification, GCP and Azure Cloud<br>Aug 2025</p></div>
     </div>
   </section>
 </main>
@@ -507,9 +512,10 @@ footer small{display:block;margin-top:64px;color:#8792A8;font-size:.85rem;border
 <footer id="contact">
   <div class="wrap">
     <h2>Building a data team?<br>Let's talk.</h2>
-    <p>I'm looking for full-time roles as a data engineer, AI engineer, data scientist or data analyst. The fastest way to reach me is a message on LinkedIn.</p>
+    <p>I'm looking for full-time roles as a data engineer, AI engineer, data scientist or data analyst. The fastest way to reach me is a message on LinkedIn, or grab my resume below.</p>
     <div class="links">
       <a class="btn primary" href="https://www.linkedin.com/in/rohit-chintakindi/">Message me on LinkedIn</a>
+      <a class="btn ghost" href="Rohit_Chintakindi_Resume.pdf" download>Download resume</a>
       <a class="btn ghost" href="https://github.com/Rohitcvs">GitHub</a>
     </div>
     <small>Rohit Chintakindi, Tempe, Arizona</small>
