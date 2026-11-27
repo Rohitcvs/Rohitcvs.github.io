@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2710%27 rx=%272%27 fill=%27%23A86B32%27/%3E%3Crect y=%2711%27 width=%2732%27 height=%2710%27 rx=%272%27 fill=%27%237D8794%27/%3E%3Crect y=%2722%27 width=%2732%27 height=%2710%27 rx=%272%27 fill=%27%23B8901A%27/%3E%3C/svg%3E">
 <title>Rohit Chintakindi · Data Engineering & AI</title>
-<meta name="description" content="Rohit Chintakindi, data and AI engineer and M.S. Computer Science student at Arizona State University. Data pipelines in Snowflake, dbt, Airflow and Azure, and LLM agents built with LangGraph.">
+<meta name="description" content="Rohit Chintakindi, data and AI engineer. I build AI agents with evaluations and guardrails, and the data pipelines they run on: Snowflake, dbt, Airflow, Azure and LangGraph.">
 <meta property="og:title" content="Rohit Chintakindi · Data Engineering & AI">
 <meta property="og:description" content="Data and AI engineer. Pipelines in Snowflake, dbt, Airflow and Azure, and LLM agents with LangGraph.">
 <meta property="og:type" content="website">
@@ -103,6 +103,46 @@ code,.id{font-family:var(--mono);font-size:.86em;color:var(--text)}
 .pipe .lbl{position:absolute;bottom:12px;left:18px;font-family:var(--mono);font-size:.78rem;color:var(--dim)}
 .pipe .hint{position:absolute;bottom:12px;right:18px;font-family:var(--mono);font-size:.78rem;color:var(--dim)}
 
+/* live status */
+.live{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.live span{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted);padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.03)}
+.live span b{color:var(--text);font-weight:600}
+.live .dot{width:8px;height:8px;border-radius:50%;background:#3CCB7F;box-shadow:0 0 10px #3CCB7F}
+@media (prefers-reduced-motion:no-preference){.live .dot{animation:pulse 2s ease-in-out infinite}@keyframes pulse{50%{box-shadow:0 0 2px #3CCB7F;opacity:.6}}}
+.focus{margin-top:20px}
+.focus h3{font-family:var(--display);font-weight:700;font-size:1.05rem;margin:0 0 10px;color:var(--text)}
+
+/* now */
+.now{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.now .tag{font-family:var(--mono);font-size:.78rem;color:var(--teal);margin:0 0 10px}
+.now h3{font-family:var(--display);font-weight:700;font-size:1.25rem;margin:0 0 8px;line-height:1.2}
+.now p{color:#C9D1E0;margin:0;font-size:.97rem}
+.now .when{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:.76rem;color:var(--gold)}
+.feed{grid-column:1/-1}
+.feed-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.feed-top h3{margin:0}
+.feed-top small{font-family:var(--mono);color:var(--dim);font-size:.78rem}
+.feed ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.feed li a{overflow-wrap:anywhere;display:flex;justify-content:space-between;gap:12px;align-items:center;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(0,0,0,.2);text-decoration:none;color:var(--text);font-weight:600;font-size:.93rem}
+.feed li a:hover{border-color:rgba(242,179,61,.4)}
+.feed li a span{font-family:var(--mono);font-weight:400;font-size:.76rem;color:var(--dim);white-space:nowrap}
+
+/* featured project */
+.proj.feature{grid-column:1/-1;display:grid;grid-template-columns:1.15fr 1fr;gap:32px;align-items:start;border-color:rgba(242,179,61,.32);background:linear-gradient(160deg,rgba(242,179,61,.07),rgba(255,255,255,.03) 45%)}
+.proj.feature h3{font-size:clamp(1.7rem,3vw,2.2rem)}
+.why{border-left:2px solid var(--gold);padding:2px 0 2px 14px;color:#E8D7B0;font-style:italic;margin:0 0 16px}
+.agent{display:flex;flex-direction:column;gap:0;padding:18px;border-radius:16px;background:rgba(0,0,0,.28);border:1px solid var(--line)}
+.agent .st{padding:10px 14px;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid var(--line);font-size:.9rem;font-weight:600}
+.agent .st small{display:block;font-weight:400;color:var(--muted);font-size:.78rem}
+.agent .st.b{border-color:rgba(201,131,69,.5);background:rgba(201,131,69,.12)}
+.agent .st.s{border-color:rgba(169,179,193,.4);background:rgba(169,179,193,.1)}
+.agent .st.g{border-color:rgba(242,179,61,.55);background:rgba(242,179,61,.12)}
+.agent .st.h{border-style:dashed;border-color:var(--teal)}
+.agent .pr{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.agent .ar{height:16px;position:relative}
+.agent .ar::before{content:"";position:absolute;left:50%;top:2px;bottom:2px;border-left:1px solid var(--dim)}
+.agent .loop{font-family:var(--mono);font-size:.74rem;color:var(--teal);text-align:center;margin-top:4px}
+
 /* section heads */
 section{padding:72px 0}
 .head{margin:0 0 30px}
@@ -120,7 +160,7 @@ section{padding:72px 0}
 .about p{margin:0 0 14px;color:#C9D1E0;font-size:1.06rem}
 .about p:last-child{margin:0}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.stat{border:1px solid var(--line);border-radius:16px;padding:16px;background:rgba(255,255,255,.02)}
+.stat{display:flex;flex-direction:column;justify-content:center;border:1px solid var(--line);border-radius:16px;padding:16px;background:rgba(255,255,255,.02)}
 .stat b{display:block;font-family:var(--display);font-size:1.9rem;font-weight:800;letter-spacing:-.03em;color:var(--gold);line-height:1.05}
 .stat span{font-size:.86rem;color:var(--muted)}
 
@@ -164,7 +204,7 @@ section{padding:72px 0}
 .gh:hover{border-color:var(--gold);color:var(--gold)}
 .gh svg{width:16px;height:16px}
 .proj.wide{grid-column:1/-1;display:grid;grid-template-columns:1fr 1.1fr;gap:28px;align-items:center}
-.proj.wide img{width:100%;height:auto;align-self:center;border-radius:14px;border:1px solid var(--line);display:block}
+.proj .shot{margin:4px 0 14px;width:100%;height:auto;align-self:center;border-radius:14px;border:1px solid var(--line);display:block}
 .more{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:20px}
 .more .card{padding:22px}
 .more h4{font-family:var(--display);font-weight:700;font-size:1.12rem;margin:0 0 6px}
@@ -202,7 +242,7 @@ footer a{color:var(--muted)}
   .portrait{width:180px}
   .mono{font-size:4.4rem}
   .about,.skills,.projects,.proj.wide,.contact{grid-template-columns:1fr}
-  .more,.edu{grid-template-columns:1fr}
+  .more,.edu,.now,.proj.feature,.feed ul{grid-template-columns:1fr}
   .contact{padding:26px}
   .nav a{padding:7px 11px;font-size:.86rem}
 }
@@ -228,6 +268,7 @@ footer a{color:var(--muted)}
 <nav class="nav" aria-label="Sections">
   <a href="#home" class="active">Home</a>
   <a href="#about" class="hide-sm">About</a>
+  <a href="#now" class="hide-sm">Now</a>
   <a href="#experience" class="hide-sm">Experience</a>
   <a href="#projects">Projects</a>
   <a href="#contact">Contact</a>
@@ -244,16 +285,16 @@ footer a{color:var(--muted)}
         <div class="bars"><i style="background:var(--bronze)"></i><i style="background:var(--silver)"></i><i style="background:var(--gold)"></i></div>
       </div>
       <div>
-        <p class="roles rise d1">Data Engineer / AI Engineer / Data Scientist</p>
+        <p class="roles rise d1">AI Agents / Data Engineering / Machine Learning</p>
         <p class="sub rise d1"><b>M.S. Computer Science, ASU</b> (Dec 2026), former Data Science Intern at Quill (Staples)</p>
         <h1 class="rise d2">Hi, I'm <span>Rohit.</span></h1>
-        <p class="lede rise d3">I build data pipelines and AI systems that turn raw data into decisions people can trust, in Snowflake, dbt, Airflow, Azure and LangGraph.</p>
+        <p class="lede rise d3">I build AI agents and the data pipelines they run on: LangGraph agents with evaluations, guardrails and human approval, on top of Snowflake, dbt, Airflow and Azure.</p>
         <div class="row rise d4">
           <a class="btn primary" href="Rohit_Chintakindi_Resume.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>Resume</a>
           <a class="btn" href="https://www.linkedin.com/in/rohit-chintakindi/"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zm7 0h3.8v1.6h.06c.53-1 1.84-2.06 3.8-2.06 4.06 0 4.8 2.67 4.8 6.15v5.31h-4v-4.7c0-1.12-.02-2.57-1.56-2.57-1.57 0-1.8 1.22-1.8 2.48v4.79H10z"/></svg>LinkedIn</a>
           <a class="btn" href="https://github.com/Rohitcvs"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.7 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>GitHub</a>
         </div>
-        <p class="status rise d4"><i aria-hidden="true"></i>Open to full-time roles</p>
+        <div class="live rise d4"><span><i class="dot" aria-hidden="true"></i><b>Open to full-time roles</b></span><span><b id="clock">Tempe, AZ</b></span><span>Now: <b>shipping eval-gated LLM agents</b></span></div>
       </div>
     </div>
 
@@ -269,12 +310,31 @@ footer a{color:var(--muted)}
       <div class="card">
         <p>I'm an M.S. Computer Science student at Arizona State University, graduating December 2026. I work where data engineering meets machine learning: building the pipelines, then the models and agents on top of them.</p>
         <p>At Quill (Staples) I built attribution and conversion models over millions of customer journeys. At United We Care I built an LLM chatbot used by thousands. On my own I build production-style projects with tests, evaluations and guardrails, because a good-looking answer isn't proof a system works.</p>
+        <div class="focus"><h3>What I focus on</h3><ul class="chips"><li>Agentic AI</li><li>LLM evaluation</li><li>Guardrails</li><li>Human-in-the-loop</li><li>RAG</li><li>Data infrastructure for AI</li><li>Lakehouse pipelines</li></ul></div>
       </div>
       <div class="stats">
         <div class="stat"><b>2.55M+</b><span>customer journeys modeled at Quill</span></div>
         <div class="stat"><b>0.68</b><span>AUC on conversion propensity</span></div>
         <div class="stat"><b>5,000+</b><span>users on the LLM chatbot I built</span></div>
         <div class="stat"><b>3</b><span>internships across DE, DS and GenAI</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="now" aria-labelledby="now-h">
+    <div class="head"><p class="q"><b>SELECT</b> * <b>FROM</b> now <b>WHERE</b> month = <b>'Nov 2026'</b></p><h2 id="now-h">What I'm doing <span>now</span></h2></div>
+    <div class="now">
+      <div class="card"><p class="tag">building</p><h3>Production-grade AI agents</h3><p>Hardening my LangGraph investment agent the way teams ship agents today: guardrails, human approval, an audit trail, evaluation gates, versioned prompts and a secured API.</p><span class="when">Nov 2026</span></div>
+      <div class="card"><p class="tag">hardening</p><h3>Reliable data pipelines</h3><p>Idempotent Airflow loads, dbt SCD Type 2 fixes with tests, and Azure secrets moved into a secret scope instead of code.</p><span class="when">Nov 2026</span></div>
+      <div class="card"><p class="tag">looking for</p><h3>My next full-time role</h3><p>Data Engineer, AI Engineer, Data Scientist or Data Analyst, after finishing my M.S. at ASU in December 2026.</p><span class="when">Available after Dec 2026</span></div>
+      <div class="card feed">
+        <div class="feed-top"><h3>Latest on GitHub</h3><small id="feed-note">recently pushed public repos</small></div>
+        <ul id="feed">
+          <li><a href="https://github.com/Rohitcvs/Investment-Agent">Investment-Agent<span>Nov 24, 2026</span></a></li>
+          <li><a href="https://github.com/Rohitcvs/apod-airflow-etl-pipeline">apod-airflow-etl-pipeline<span>Nov 17, 2026</span></a></li>
+          <li><a href="https://github.com/Rohitcvs/Airbnb_Snowflake_DBT_Data_Engineer_Project">Airbnb_Snowflake_DBT_Data_Engineer_Project<span>Nov 17, 2026</span></a></li>
+          <li><a href="https://github.com/Rohitcvs/Adventure-Works-Azure-Data-Engineering-Project">Adventure-Works-Azure-Data-Engineering-Project<span>Nov 17, 2026</span></a></li>
+        </ul>
       </div>
     </div>
   </section>
@@ -328,13 +388,26 @@ footer a{color:var(--muted)}
   <section id="projects" aria-labelledby="proj-h">
     <div class="head"><p class="q"><b>SELECT</b> * <b>FROM</b> projects <b>WHERE</b> shipped = <b>TRUE</b></p><h2 id="proj-h">Projects</h2></div>
     <div class="projects">
-      <article class="card proj">
-        <p class="kind">llm agents</p>
-        <h3>Multi-Agent Investment Analysis</h3>
-        <p>AI agents research a stock, analyze its price trends, write a Buy/Hold/Sell report and review each other's work, and a person approves the report before it's saved.</p>
-        <div class="flow" aria-label="Pipeline"><span>validate</span><i>&rarr;</i><span class="b">research + technical</span><i>&rarr;</i><span class="s">writer &#8644; critic</span><i>&rarr;</i><span class="g">human approval</span></div>
-        <ul class="metrics"><li><b>5</b> agents</li><li><b>&ge;80%</b> grounding gate</li><li><b>&le;$0.05</b> per run</li><li><b>59</b> tests in CI</li></ul>
-        <div class="foot"><span class="stack">LangGraph, GPT-4o, FastAPI, Docker</span><a class="gh" href="https://github.com/Rohitcvs/Investment-Agent"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.7 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>Code</a></div>
+      <article class="card proj feature">
+        <div>
+          <p class="kind">featured / agentic ai</p>
+          <h3>Multi-Agent Investment Analysis</h3>
+          <p>AI agents research a stock, analyze its price trends, write a Buy/Hold/Sell report and review each other's work. A person approves every report before it's saved.</p>
+          <p class="why">My first version produced convincing reports that were wrong underneath. Every layer since exists to catch failures that look right.</p>
+          <ul class="metrics"><li><b>5</b> agents</li><li><b>&ge;80%</b> grounding gate</li><li><b>&ge;90%</b> completion gate</li><li><b>&le;$0.05</b> per run</li><li><b>59</b> tests in CI</li></ul>
+          <div class="foot"><span class="stack">LangGraph, GPT-4o, FastAPI, Streamlit, Docker</span><a class="gh" href="https://github.com/Rohitcvs/Investment-Agent"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.7 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>Code</a></div>
+        </div>
+        <div class="agent" aria-label="Agent workflow">
+          <div class="st">Validate ticker<small>rejects bad input before any tokens are spent</small></div>
+          <div class="ar"></div>
+          <div class="pr"><div class="st b">Research agent<small>prices, news, memory</small></div><div class="st b">Technical agent<small>RSI, MACD, SMA, Bollinger</small></div></div>
+          <div class="ar"></div>
+          <div class="st s">Writer &#8644; Critic<small>grounded report, up to 3 revisions</small></div>
+          <div class="ar"></div>
+          <div class="st h">Human approval<small>run pauses until a person decides</small></div>
+          <div class="ar"></div>
+          <div class="st g">Saved to memory<small>audit-logged, versioned prompts</small></div>
+        </div>
       </article>
       <article class="card proj">
         <p class="kind">data warehouse</p>
@@ -360,15 +433,13 @@ footer a{color:var(--muted)}
         <ul class="metrics"><li><b>daily</b> schedule</li><li><b>2</b> retries per task</li><li>idempotent reruns</li></ul>
         <div class="foot"><span class="stack">Airflow, PostgreSQL, Docker</span><a class="gh" href="https://github.com/Rohitcvs/apod-airflow-etl-pipeline"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.7 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>Code</a></div>
       </article>
-      <article class="card proj wide">
-        <div>
+      <article class="card proj">
           <p class="kind">analytics</p>
           <h3>Customer Shopping Behavior Analysis</h3>
           <p>A full analytics workflow on 3,900 retail purchases: cleaning in Python, 10 business questions in SQL, and a Power BI dashboard with recommendations.</p>
+        <img class="shot" src="img/customer-dashboard.webp" width="1272" height="691" loading="lazy" alt="Customer Behavior Dashboard in Power BI: 3.9K customers, $59.76 average purchase, 3.75 average rating, and revenue and sales by category and age group">
           <ul class="metrics"><li><b>$233K</b> revenue analyzed</li><li><b>10</b> SQL questions</li><li><b>43%</b> discount reliance found</li></ul>
           <div class="foot"><span class="stack">Python, MySQL, Power BI</span><a class="gh" href="https://github.com/Rohitcvs/customer-trends-data-analysis-SQL-Python-PowerBI"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.7 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>Code</a></div>
-        </div>
-        <img src="img/customer-dashboard.webp" width="1272" height="691" loading="lazy" alt="Customer Behavior Dashboard in Power BI: 3.9K customers, $59.76 average purchase, 3.75 average rating, and revenue and sales by category and age group">
       </article>
     </div>
     <div class="more">
@@ -424,9 +495,19 @@ footer a{color:var(--muted)}
 <script>
 /* active nav pill */
 (()=>{const links=[...document.querySelectorAll('.nav a[href^="#"]')];const map=new Map(links.map(a=>[a.getAttribute('href').slice(1),a]));
-const ids=['home','about','experience','projects','contact'];
-const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){let id=e.target.id;if(id==='skills')id='about';if(id==='education')id='projects';const a=map.get(id);if(a){links.forEach(l=>l.classList.remove('active'));a.classList.add('active');}}})},{rootMargin:'-45% 0px -50% 0px'});
+
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){let id=e.target.id;if(id==='skills')id='now';if(id==='education')id='projects';const a=map.get(id);if(a){links.forEach(l=>l.classList.remove('active'));a.classList.add('active');}}})},{rootMargin:'-45% 0px -50% 0px'});
 document.querySelectorAll('main section[id]').forEach(s=>obs.observe(s));})();
+
+/* live clock (Tempe, AZ) */
+(()=>{const el=document.getElementById('clock');if(!el)return;const f=new Intl.DateTimeFormat('en-US',{hour:'numeric',minute:'2-digit',timeZone:'America/Phoenix'});const t=()=>{el.textContent=f.format(new Date())+' in Tempe, AZ'};t();setInterval(t,30000)})();
+/* live GitHub feed */
+(()=>{const ul=document.getElementById('feed');if(!ul)return;const note=document.getElementById('feed-note');
+const rel=d=>{const s=(Date.now()-new Date(d))/1000;if(s<3600)return Math.max(1,Math.round(s/60))+' min ago';if(s<86400)return Math.round(s/3600)+' h ago';const n=Math.round(s/86400);return n===1?'yesterday':n<31?n+' days ago':new Date(d).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})};
+fetch('https://api.github.com/users/Rohitcvs/repos?sort=pushed&per_page=12').then(r=>r.ok?r.json():Promise.reject()).then(rs=>{
+ const list=rs.filter(r=>!r.fork&&!r.private&&r.name.toLowerCase()!=='rohitcvs'&&r.name.toLowerCase()!=='rohitcvs.github.io').slice(0,4);if(!list.length)return;
+ ul.innerHTML='';list.forEach(r=>{const li=document.createElement('li');const a=document.createElement('a');a.href=r.html_url;a.textContent=r.name;const sp=document.createElement('span');sp.textContent='pushed '+rel(r.pushed_at);a.appendChild(sp);li.appendChild(a);ul.appendChild(li)});
+ if(note)note.textContent='live from GitHub';}).catch(()=>{});})();
 
 /* pipeline particle canvas */
 (()=>{const c=document.getElementById('flow');if(!c)return;const ctx=c.getContext('2d');
