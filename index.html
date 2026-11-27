@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2710%27 rx=%272%27 fill=%27%23A86B32%27/%3E%3Crect y=%2711%27 width=%2732%27 height=%2710%27 rx=%272%27 fill=%27%237D8794%27/%3E%3Crect y=%2722%27 width=%2732%27 height=%2710%27 rx=%272%27 fill=%27%23B8901A%27/%3E%3C/svg%3E">
+<title>Rohit Chintakindi · Data Engineering & AI</title>
+<meta name="description" content="Rohit Chintakindi, M.S. Computer Science at Arizona State University. Data pipelines in Snowflake, dbt, Airflow and Azure, and LLM agents built with LangGraph.">
+<meta property="og:title" content="Rohit Chintakindi · Data Engineering & AI">
+<meta property="og:description" content="Data pipelines and AI systems, from raw data to decisions.">
+<style>
+@font-face{font-family:"Bricolage Grotesque";font-weight:500;font-style:normal;font-display:swap;src:url(fonts/bricolage-grotesque-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:"Bricolage Grotesque";font-weight:700;font-style:normal;font-display:swap;src:url(fonts/bricolage-grotesque-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"Bricolage Grotesque";font-weight:800;font-style:normal;font-display:swap;src:url(fonts/bricolage-grotesque-latin-800-normal.woff2) format("woff2")}
+@font-face{font-family:"IBM Plex Sans";font-weight:400;font-style:normal;font-display:swap;src:url(fonts/ibm-plex-sans-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"IBM Plex Sans";font-weight:400;font-style:italic;font-display:swap;src:url(fonts/ibm-plex-sans-latin-400-italic.woff2) format("woff2")}
+@font-face{font-family:"IBM Plex Sans";font-weight:500;font-style:normal;font-display:swap;src:url(fonts/ibm-plex-sans-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:"IBM Plex Sans";font-weight:600;font-style:normal;font-display:swap;src:url(fonts/ibm-plex-sans-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"IBM Plex Mono";font-weight:400;font-style:normal;font-display:swap;src:url(fonts/ibm-plex-mono-latin-400-normal.woff2) format("woff2")}
+:root{
+  --paper:#EEF1F4;
+  --sheet:#FFFFFF;
+  --ink:#14213D;
+  --ink-soft:#4A5672;
+  --rule:#D3D9E2;
+  --bronze:#A86B32;
+  --bronze-tint:#F3E6D8;
+  --silver:#7D8794;
+  --silver-tint:#E4E8ED;
+  --gold:#B8901A;
+  --gold-tint:#F6EDCB;
+  --teal:#0E6E6D;
+  --display:"Bricolage Grotesque", "Segoe UI", sans-serif;
+  --body:"IBM Plex Sans", "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, monospace;
+  --measure:68ch;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--teal);text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:3px solid var(--teal);outline-offset:3px;border-radius:2px}
+code,.id{font-family:var(--mono);font-size:.86em}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:#fff;padding:8px 14px;z-index:10}
+.skip:focus{left:12px}
+
+/* nav */
+.top{display:flex;justify-content:space-between;align-items:center;padding:22px 0;font-size:.95rem}
+.top .mark{font-family:var(--display);font-weight:800;font-size:1.15rem;color:var(--ink);text-decoration:none;letter-spacing:-.01em}
+.top nav{display:flex;gap:22px;flex-wrap:wrap}
+.top nav a{color:var(--ink-soft);text-decoration:none}
+.top nav a:hover{color:var(--ink);text-decoration:underline}
+
+/* hero */
+.hero{padding:56px 0 72px;display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(2.7rem,6.4vw,5.1rem);line-height:.98;letter-spacing:-.035em;margin:0 0 22px}
+.hero .lede{font-size:1.25rem;line-height:1.5;color:var(--ink-soft);max-width:34ch;margin:0 0 26px}
+.hero .lede strong{color:var(--ink);font-weight:600}
+.status{display:inline-flex;align-items:center;gap:10px;font-size:.95rem;background:var(--sheet);border:1px solid var(--rule);padding:8px 14px;border-radius:999px;margin-bottom:26px}
+.status i{width:9px;height:9px;border-radius:50%;background:#2E9E5B;box-shadow:0 0 0 4px #2E9E5B22}
+.links{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:11px 20px;border-radius:8px;font-weight:600;text-decoration:none;font-size:.98rem;border:1.5px solid var(--ink)}
+.btn.primary{background:var(--ink);color:#fff}
+.btn.primary:hover{background:#22325A}
+.btn.ghost{color:var(--ink)}
+.btn.ghost:hover{background:var(--sheet)}
+
+/* medallion hero diagram */
+.medallion{margin:0;background:var(--sheet);border:1px solid var(--rule);border-radius:14px;padding:26px 26px 20px}
+.medallion figcaption{font-size:.92rem;color:var(--ink-soft);margin-top:16px;line-height:1.5}
+.layer{display:grid;grid-template-columns:86px 1fr;gap:16px;align-items:stretch;position:relative}
+.layer + .layer{margin-top:14px}
+.layer + .layer::before{content:"";position:absolute;left:42px;top:-14px;height:14px;border-left:2px dashed var(--rule)}
+.tag{font-family:var(--display);font-weight:700;font-size:.95rem;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff}
+.layer.b .tag{background:var(--bronze)}
+.layer.s .tag{background:var(--silver)}
+.layer.g .tag{background:var(--gold)}
+.fill{border-radius:8px;padding:12px 16px;font-size:.95rem;line-height:1.45}
+.layer.b .fill{background:var(--bronze-tint)}
+.layer.s .fill{background:var(--silver-tint)}
+.layer.g .fill{background:var(--gold-tint)}
+.fill b{display:block;font-family:var(--display);font-size:1.35rem;letter-spacing:-.01em;line-height:1.15;margin-bottom:2px}
+@media (prefers-reduced-motion:no-preference){
+  .layer{opacity:0;transform:translateX(-14px);animation:flow .6s cubic-bezier(.2,.7,.2,1) forwards}
+  .layer.s{animation-delay:.45s}
+  .layer.g{animation-delay:.9s}
+  @keyframes flow{to{opacity:1;transform:none}}
+}
+
+/* sections */
+section{padding:72px 0;border-top:1px solid var(--rule)}
+.sec-head{display:grid;grid-template-columns:260px 1fr;gap:40px;margin-bottom:40px}
+.sec-head h2{font-family:var(--display);font-weight:800;font-size:2.3rem;line-height:1.05;letter-spacing:-.025em;margin:0}
+.sec-head p{margin:6px 0 0;color:var(--ink-soft);max-width:var(--measure)}
+
+/* experience timeline */
+.timeline{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:260px 1fr;gap:0 40px}
+.timeline > li{display:contents}
+.when{padding:22px 0;font-weight:500;color:var(--ink-soft);border-top:1px solid var(--rule);font-size:.98rem}
+.what{padding:22px 0;border-top:1px solid var(--rule)}
+.timeline > li:first-child .when,.timeline > li:first-child .what{border-top:0;padding-top:0}
+.what h3{font-family:var(--display);font-weight:700;font-size:1.4rem;letter-spacing:-.01em;margin:0 0 2px;line-height:1.2}
+.what .org{color:var(--ink-soft);margin:0 0 10px}
+.what ul{margin:0;padding-left:1.1em;max-width:var(--measure)}
+.what li{margin:4px 0}
+.what li::marker{color:var(--bronze)}
+
+/* projects */
+.project{background:var(--sheet);border:1px solid var(--rule);border-radius:14px;padding:36px;display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.project + .project{margin-top:28px}
+.project h3{font-family:var(--display);font-weight:800;font-size:1.85rem;letter-spacing:-.02em;line-height:1.1;margin:0 0 12px}
+.project .pitch{font-size:1.08rem;margin:0 0 18px;max-width:52ch}
+.project ul{margin:0 0 20px;padding-left:1.1em}
+.project li{margin:6px 0}
+.project li::marker{color:var(--gold)}
+.project .stack{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 20px;padding:0;list-style:none}
+.project .stack li{margin:0;font-size:.85rem;padding:4px 10px;border-radius:6px;background:var(--paper);color:var(--ink-soft)}
+.project .stack li::marker{content:none}
+.repo{font-weight:600}
+.lesson{border-left:3px solid var(--gold);padding:4px 0 4px 16px;margin:0 0 20px;color:var(--ink-soft);font-style:italic;max-width:52ch}
+
+/* pipeline diagrams */
+.flow{background:var(--paper);border-radius:10px;padding:22px;display:flex;flex-direction:column;align-items:stretch;gap:0;align-self:start}
+.flow .step{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;padding:9px 13px;font-size:.92rem;line-height:1.35}
+.flow .step small{display:block;color:var(--ink-soft);font-size:.8rem}
+.flow .arrow{height:22px;position:relative}
+.flow .arrow::before{content:"";position:absolute;left:50%;top:2px;bottom:6px;border-left:1.5px solid var(--silver)}
+.flow .arrow::after{content:"";position:absolute;left:calc(50% - 4px);bottom:2px;border:4px solid transparent;border-top:6px solid var(--silver)}
+.flow .pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.flow .step.bz{border-color:var(--bronze);background:var(--bronze-tint)}
+.flow .step.sv{border-color:var(--silver);background:var(--silver-tint)}
+.flow .step.gd{border-color:var(--gold);background:var(--gold-tint)}
+.flow .step.hl{border-color:var(--teal);border-style:dashed}
+.flow .loop{font-size:.8rem;color:var(--teal);text-align:center;margin:4px 0 0}
+.flow-title{font-size:.85rem;color:var(--ink-soft);margin:0 0 12px}
+
+/* more projects */
+.more{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--rule);margin-top:44px}
+.more article{padding:24px 24px 6px 0}
+.more article + article{padding-left:24px;border-left:1px solid var(--rule)}
+.more h4{font-family:var(--display);font-weight:700;font-size:1.2rem;margin:0 0 6px;letter-spacing:-.01em}
+.more p{margin:0 0 10px;font-size:.98rem;color:var(--ink-soft)}
+
+/* toolbox */
+.tools{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.tools h3{font-family:var(--display);font-size:1.1rem;font-weight:700;margin:0 0 8px;padding-bottom:8px;border-bottom:3px solid var(--rule)}
+.tools div:nth-child(1) h3{border-color:var(--bronze)}
+.tools div:nth-child(2) h3{border-color:var(--silver)}
+.tools div:nth-child(3) h3{border-color:var(--gold)}
+.tools div:nth-child(4) h3{border-color:var(--teal)}
+.tools ul{list-style:none;margin:0;padding:0}
+.tools li{padding:3px 0}
+
+/* education + contact */
+.edu{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.edu div{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:24px}
+.edu h3{font-family:var(--display);font-size:1.3rem;margin:0 0 4px;letter-spacing:-.01em}
+.edu p{margin:0;color:var(--ink-soft)}
+footer{background:var(--ink);color:#DCE2EC;padding:64px 0 40px;margin-top:0}
+footer h2{font-family:var(--display);font-weight:800;font-size:clamp(2rem,4.4vw,3.2rem);letter-spacing:-.03em;line-height:1.05;margin:0 0 14px;color:#fff;max-width:24ch}
+footer p{max-width:52ch;margin:0 0 26px;color:#B9C3D4}
+footer .btn.primary{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+footer .btn.primary:hover{background:#D1A72A}
+footer .btn.ghost{color:#fff;border-color:#7F8BA6}
+footer .btn.ghost:hover{background:#22325A}
+footer small{display:block;margin-top:56px;color:#8792A8;font-size:.85rem}
+
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;gap:40px;padding-top:28px}
+  .sec-head,.timeline{grid-template-columns:1fr;gap:6px}
+  .timeline .when{border-top:1px solid var(--rule);padding-bottom:0}
+  .timeline .what{border-top:0;padding-top:4px}
+  .timeline > li:first-child .when{border-top:0}
+  .project{grid-template-columns:1fr;padding:26px;gap:26px}
+  .more{grid-template-columns:1fr}
+  .more article,.more article + article{padding:20px 0 6px;border-left:0;border-top:1px solid var(--rule)}
+  .more article:first-child{border-top:0}
+  .tools{grid-template-columns:1fr 1fr}
+  .edu{grid-template-columns:1fr}
+}
+@media (max-width:520px){
+  .wrap{padding:0 18px}
+  .top nav{display:none}
+  .tools{grid-template-columns:1fr}
+  .layer{grid-template-columns:70px 1fr}
+  .layer + .layer::before{left:34px}
+  .flow .pair{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#work">Skip to projects</a>
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="#">Rohit Chintakindi</a>
+    <nav aria-label="Sections">
+      <a href="#experience">Experience</a>
+      <a href="#work">Projects</a>
+      <a href="#toolbox">Toolbox</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+  <div class="hero">
+    <div>
+      <h1>I turn raw data into decisions people can trust.</h1>
+      <p class="lede">I'm a <strong>data engineer and ML builder</strong> finishing my M.S. in Computer Science at Arizona State University. I build pipelines in Snowflake, dbt, Airflow and Azure, and LLM agents with LangGraph.</p>
+      <p class="status"><i aria-hidden="true"></i>Open to full-time data roles</p>
+      <div class="links">
+        <a class="btn primary" href="#work">See my projects</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/rohit-chintakindi/">LinkedIn</a>
+        <a class="btn ghost" href="https://github.com/Rohitcvs">GitHub</a>
+      </div>
+    </div>
+
+    <figure class="medallion" aria-label="My Quill attribution work as three data layers">
+      <div class="layer b">
+        <span class="tag">Raw</span>
+        <div class="fill"><b>4M+ rows</b>order and marketing touchpoint data in Snowflake</div>
+      </div>
+      <div class="layer s">
+        <span class="tag">Clean</span>
+        <div class="fill"><b>3 data-integrity issues</b>found and fixed before training, so conversions weren't over-counted</div>
+      </div>
+      <div class="layer g">
+        <span class="tag">Model</span>
+        <div class="fill"><b>Channel attribution</b>a logistic-regression model showing which marketing channels drive conversions</div>
+      </div>
+      <figcaption>My Data Science internship at Quill (summer 2026), traced from raw data to model.</figcaption>
+    </figure>
+  </div>
+
+  <section id="experience" aria-labelledby="exp-h">
+    <div class="sec-head">
+      <h2 id="exp-h">Experience</h2>
+      <p>Three internships across data engineering, data science and generative AI, most recent first.</p>
+    </div>
+    <ol class="timeline">
+      <li>
+        <div class="when">Jun – Aug 2026<br>Lincolnshire, IL</div>
+        <div class="what">
+          <h3>Data Science Intern</h3>
+          <p class="org">Quill</p>
+          <ul>
+            <li>Built a multi-touch attribution pipeline in Snowflake and Python over 4M+ order and touchpoint rows, with an external analytics vendor.</li>
+            <li>Found and fixed three data-integrity issues in raw touchpoint data, including placeholder order numbers shared across 200+ customers, that would have inflated conversion counts.</li>
+            <li>Designed a logistic-regression classifier that surfaced a marketing signal hidden by an unattributed-traffic placeholder present on 90%+ of converting customers.</li>
+            <li>Engineered RFM and rolling-window features to separate organic repurchases from marketing-driven conversions.</li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <div class="when">May – Aug 2025<br>Remote</div>
+        <div class="what">
+          <h3>Gen AI Intern</h3>
+          <p class="org">United We Care</p>
+          <ul>
+            <li>Helped develop and fine-tune NLP models for empathetic, context-aware wellness chatbots.</li>
+            <li>Preprocessed and analyzed mental-health datasets to improve model accuracy and relevance.</li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <div class="when">Jun – Aug 2024<br>Lincolnshire, IL</div>
+        <div class="what">
+          <h3>Data Engineering Intern</h3>
+          <p class="org">Quill</p>
+          <ul>
+            <li>Built API-based ETLs, data cleansing and visualizations, and helped design sales and digital-marketing aggregates.</li>
+            <li>Wrote Python modules that extract email campaigns and offers from Klaviyo as JSON.</li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section id="work" aria-labelledby="work-h">
+    <div class="sec-head">
+      <h2 id="work-h">Projects</h2>
+      <p>Each project is shown as the pipeline it actually runs, from where the data comes in to where it's used.</p>
+    </div>
+
+    <article class="project">
+      <div>
+        <h3>Multi-Agent Investment Analysis</h3>
+        <p class="pitch">AI agents research a stock, analyze its price trends, write a Buy/Hold/Sell report and review each other's work. A person approves the report before anything is saved.</p>
+        <p class="lesson">My first version produced convincing reports, until I traced the data and found the writer was getting the agents' requests for data, not the data itself. Every layer after that exists to catch failures that look right.</p>
+        <ul>
+          <li>Guardrails, an audit log and human approval decide where the agents' autonomy stops.</li>
+          <li>Evaluations over 10 tickers score grounding: whether the report's numbers appear in the source data.</li>
+          <li>Prompts are versioned like code, with a deployment gate and one-setting rollback.</li>
+          <li>FastAPI service with per-customer API keys and rate limits, 59 tests in CI, and a Dockerfile.</li>
+        </ul>
+        <ul class="stack" aria-label="Tools used">
+          <li>LangGraph</li><li>Python</li><li>FastAPI</li><li>Streamlit</li><li>SQLite</li><li>Docker</li><li>GitHub Actions</li>
+        </ul>
+        <a class="repo" href="https://github.com/Rohitcvs/Investment-Agent">View the code on GitHub</a>
+      </div>
+      <div class="flow" role="img" aria-label="Pipeline: validate ticker, research and technical agents in parallel, writer, critic with up to 3 revisions, human approval, then save to memory">
+        <p class="flow-title">How a request flows</p>
+        <div class="step">Validate ticker<small>rejects bad input before any tokens are spent</small></div>
+        <div class="arrow"></div>
+        <div class="pair">
+          <div class="step bz">Research agent<small>prices, news, past reports</small></div>
+          <div class="step bz">Technical agent<small>RSI, MACD, SMA, Bollinger</small></div>
+        </div>
+        <div class="arrow"></div>
+        <div class="step sv">Writer<small>report using only the data provided</small></div>
+        <div class="arrow"></div>
+        <div class="step sv">Critic<small>checks recency, grounding, clarity</small></div>
+        <p class="loop">sends drafts back to the writer, up to 3 times</p>
+        <div class="arrow"></div>
+        <div class="step hl">Human approval<small>run pauses until a person decides</small></div>
+        <div class="arrow"></div>
+        <div class="step gd">Saved to memory<small>context for the next run on that ticker</small></div>
+      </div>
+    </article>
+
+    <article class="project">
+      <div>
+        <h3>Airbnb Pipeline with Snowflake and dbt</h3>
+        <p class="pitch">Raw listings, hosts and bookings become analytics-ready tables in Snowflake, through a Bronze, Silver and Gold medallion design built entirely in dbt.</p>
+        <ul>
+          <li>Incremental models and SCD Type 2 snapshots keep point-in-time history of every change.</li>
+          <li>Used dbt's <code>check</code> snapshot strategy because the sources have no <code>updated_at</code>, so timestamp-based change detection couldn't work.</li>
+          <li>Custom macros and Jinja-generated SQL build the wide one-big-table and fact models.</li>
+        </ul>
+        <ul class="stack" aria-label="Tools used">
+          <li>Snowflake</li><li>dbt</li><li>Jinja</li><li>SQL</li><li>Python</li>
+        </ul>
+        <a class="repo" href="https://github.com/Rohitcvs/Airbnb_Snowflake_DBT_Data_Engineer_Project">View the code on GitHub</a>
+      </div>
+      <div class="flow" role="img" aria-label="Pipeline: source CSVs to Snowflake staging, bronze raw tables, silver cleaned tables, gold one big table and fact, plus SCD Type 2 snapshots">
+        <p class="flow-title">How the data moves</p>
+        <div class="step">Source CSVs<small>listings, hosts, bookings</small></div>
+        <div class="arrow"></div>
+        <div class="step">Snowflake staging</div>
+        <div class="arrow"></div>
+        <div class="step bz">Bronze<small><span class="id">bronze_bookings</span>, untouched copy</small></div>
+        <div class="arrow"></div>
+        <div class="step sv">Silver<small><span class="id">silver_listings</span>, cleaned and price-bucketed</small></div>
+        <div class="arrow"></div>
+        <div class="pair">
+          <div class="step gd">Gold<small><span class="id">obt</span> and <span class="id">fact</span></small></div>
+          <div class="step gd">Snapshots<small>SCD Type 2 history</small></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="project">
+      <div>
+        <h3>AdventureWorks Lakehouse on Azure</h3>
+        <p class="pitch">An end-to-end Azure pipeline that takes retail sales data from source to Power BI dashboard, answering how sales perform across products, regions and customers over time.</p>
+        <ul>
+          <li>Parameterized Data Factory pipelines, so a new source table is a config change, not a new pipeline.</li>
+          <li>Gold views use <code>CREATE OR ALTER</code>, so the serving layer can be redeployed safely any number of times.</li>
+          <li>Secrets live in Key Vault, and Power BI connects through a read-only login with least privilege.</li>
+        </ul>
+        <ul class="stack" aria-label="Tools used">
+          <li>Data Factory</li><li>ADLS Gen2</li><li>Databricks</li><li>PySpark</li><li>Synapse</li><li>Power BI</li>
+        </ul>
+        <a class="repo" href="https://github.com/Rohitcvs/Adventure-Works-Azure-Data-Engineering-Project">View the code on GitHub</a>
+      </div>
+      <div class="flow" role="img" aria-label="Pipeline: Data Factory ingestion to bronze in ADLS, Databricks PySpark to silver Parquet, Synapse serverless gold views, Power BI dashboards">
+        <p class="flow-title">How the data moves</p>
+        <div class="step">Azure Data Factory<small>parameterized copy pipelines</small></div>
+        <div class="arrow"></div>
+        <div class="step bz">Bronze in ADLS Gen2<small>raw data stored as-is</small></div>
+        <div class="arrow"></div>
+        <div class="step">Databricks, PySpark<small>derive, standardize, write Parquet</small></div>
+        <div class="arrow"></div>
+        <div class="step sv">Silver<small>cleaned Parquet</small></div>
+        <div class="arrow"></div>
+        <div class="step gd">Gold in Synapse<small>serverless SQL views, dimensional model</small></div>
+        <div class="arrow"></div>
+        <div class="step hl">Power BI<small>dashboards for the business</small></div>
+      </div>
+    </article>
+
+    <article class="project">
+      <div>
+        <h3>Customer Shopping Behavior Analysis</h3>
+        <p class="pitch">A full analytics workflow on 3,900 retail purchases: cleaning in Python, 10 business questions in SQL, and a Power BI dashboard with recommendations.</p>
+        <ul>
+          <li>Found that subscribers don't spend more per order ($59.49 vs. $59.87), so the subscription program isn't lifting basket size.</li>
+          <li>43% of purchases used a discount, which flags a margin risk worth watching.</li>
+          <li>SQL with CTEs, CASE-based segmentation into new, returning and loyal customers, and window functions.</li>
+        </ul>
+        <ul class="stack" aria-label="Tools used">
+          <li>Python</li><li>pandas</li><li>MySQL</li><li>SQL</li><li>Power BI</li>
+        </ul>
+        <a class="repo" href="https://github.com/Rohitcvs/customer-trends-data-analysis-SQL-Python-PowerBI">View the code on GitHub</a>
+      </div>
+      <div class="flow" role="img" aria-label="Workflow: raw CSV, Python cleaning and feature engineering, MySQL, 10 SQL business questions, Power BI dashboard and recommendations">
+        <p class="flow-title">How the analysis runs</p>
+        <div class="step bz">3,900 transactions<small>18 columns, 37 missing ratings</small></div>
+        <div class="arrow"></div>
+        <div class="step">Python cleaning<small>impute by category, add age groups</small></div>
+        <div class="arrow"></div>
+        <div class="step sv">MySQL<small>loaded with SQLAlchemy</small></div>
+        <div class="arrow"></div>
+        <div class="step">10 SQL questions<small>revenue, segments, discounts, loyalty</small></div>
+        <div class="arrow"></div>
+        <div class="step gd">Power BI and report<small>findings and recommendations</small></div>
+      </div>
+    </article>
+
+    <div class="more">
+      <article>
+        <h4>Airflow ETL Pipeline</h4>
+        <p>Daily Airflow DAG that loads NASA's Astronomy Picture of the Day into PostgreSQL. Loads are idempotent, so re-running a day updates its row instead of duplicating it.</p>
+        <a href="https://github.com/Rohitcvs/apod-airflow-etl-pipeline">View on GitHub</a>
+      </article>
+      <article>
+        <h4>Student Performance Predictor</h4>
+        <p>Modular ML pipeline that tunes 7 regression models and serves the best one (R² ≈ 0.88) through a Flask app, with CI/CD to Azure.</p>
+        <a href="https://github.com/Rohitcvs/mlproject">View on GitHub</a>
+      </article>
+      <article>
+        <h4>Brazilian E-Commerce on Databricks</h4>
+        <p>PySpark ingestion and transformation of the Brazilian e-commerce dataset from ADLS Gen2, with OAuth-secured access and schema validation.</p>
+        <a href="https://github.com/Rohitcvs/brazilian-ecommerce-project">View on GitHub</a>
+      </article>
+    </div>
+  </section>
+
+  <section id="toolbox" aria-labelledby="tools-h">
+    <div class="sec-head">
+      <h2 id="tools-h">Toolbox</h2>
+      <p>What I've used in internships and the projects above.</p>
+    </div>
+    <div class="tools">
+      <div><h3>Data engineering</h3><ul><li>Snowflake</li><li>dbt</li><li>Apache Airflow</li><li>Databricks, PySpark</li><li>ETL and medallion design</li></ul></div>
+      <div><h3>Cloud and databases</h3><ul><li>Azure Data Factory</li><li>ADLS Gen2, Synapse</li><li>PostgreSQL, MySQL</li><li>Docker</li></ul></div>
+      <div><h3>ML and AI</h3><ul><li>LangGraph, LangChain</li><li>scikit-learn, XGBoost</li><li>TensorFlow, Keras</li><li>Evaluations and guardrails</li></ul></div>
+      <div><h3>Languages and analytics</h3><ul><li>Python, SQL</li><li>pandas</li><li>Power BI</li><li>FastAPI, Streamlit, Flask</li></ul></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="edu-h">
+    <div class="sec-head">
+      <h2 id="edu-h">Education</h2>
+      <p>Both degrees from the Ira A. Fulton Schools of Engineering at Arizona State University.</p>
+    </div>
+    <div class="edu">
+      <div><h3>M.S., Computer Science</h3><p>Arizona State University<br>Aug 2025 – Dec 2026</p></div>
+      <div><h3>B.S., Computer Science</h3><p>Arizona State University<br>2021 – 2025, GPA 3.62</p></div>
+    </div>
+  </section>
+  </main>
+</div>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Building a data team? Let's talk.</h2>
+    <p>I'm looking for full-time roles in data engineering, data science and analytics. The fastest way to reach me is a message on LinkedIn.</p>
+    <div class="links">
+      <a class="btn primary" href="https://www.linkedin.com/in/rohit-chintakindi/">Message me on LinkedIn</a>
+      <a class="btn ghost" href="https://github.com/Rohitcvs">GitHub</a>
+    </div>
+    <small>Rohit Chintakindi, Tempe, Arizona</small>
+  </div>
+</footer>
+</body>
+</html>
