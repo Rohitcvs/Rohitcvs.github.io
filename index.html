@@ -336,9 +336,9 @@ footer small{display:block;margin-top:64px;color:#8792A8;font-size:.85rem;border
         <p class="lesson"><strong>What I learned</strong>My first version produced convincing reports, until I traced the data and found the writer was getting the agents' requests for data, not the data itself. Every layer after that exists to catch failures that look right.</p>
         <ul>
           <li>Guardrails, an audit log and human approval decide where the agents' autonomy stops.</li>
-          <li>Evaluations over 10 tickers score grounding: whether the report's numbers appear in the source data.</li>
+          <li>An evaluation gate over 10 tickers blocks any release below 90% completion or 80% grounding (report numbers traced to source data), or above $0.05 per run or 2 minutes.</li>
           <li>Prompts are versioned like code, with a deployment gate and one-setting rollback.</li>
-          <li>FastAPI service with per-customer API keys and rate limits, 59 tests in CI, and a Dockerfile.</li>
+          <li>FastAPI service with per-customer API keys, rate limits and 1-hour caching, 59 passing tests in CI, and a Dockerfile.</li>
         </ul>
         <ul class="stack" aria-label="Tools used">
           <li>LangGraph</li><li>GPT-4o</li><li>Python</li><li>FastAPI</li><li>Streamlit</li><li>SQLite</li><li>Docker</li><li>GitHub Actions</li>
@@ -467,7 +467,7 @@ footer small{display:block;margin-top:64px;color:#8792A8;font-size:.85rem;border
     <div class="more">
       <article>
         <h4>Airflow ETL Pipeline</h4>
-        <p>Daily Airflow DAG that loads NASA's Astronomy Picture of the Day into PostgreSQL. Loads are idempotent, so re-running a day updates its row instead of duplicating it.</p>
+        <p>Daily Airflow DAG that loads NASA's Astronomy Picture of the Day into PostgreSQL. Idempotent upserts and 2 retries per task (5 minutes apart) make every rerun safe.</p>
         <a href="https://github.com/Rohitcvs/apod-airflow-etl-pipeline">View on GitHub</a>
       </article>
       <article>
